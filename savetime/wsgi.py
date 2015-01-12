@@ -11,15 +11,17 @@ import site
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "savetime.settings")
 
+SITE_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
 # Add the site-packages of the chosen virtualenv to work with
-site.addsitedir('/var/www/virtualEnvs/savetimesite/lib/python2.7/site-packages')
+site.addsitedir(os.path.join(SITE_ROOT, "lib", "python2.7", "site-packages"))
 
 # Add the app's directory to the PYTHONPATH
-sys.path.append('/var/www/virtualEnvs/savetimesite/savetime')
-sys.path.append('/var/www/virtualEnvs/savetimesite/savetime/savetimeapp')
+sys.path.append(os.path.join(SITE_ROOT, "savetime"))
+sys.path.append(os.path.join(SITE_ROOT, "savetime", "savetimeapp"))
 
 # Activate your virtual env
-activate_env=os.path.expanduser("/var/www/virtualEnvs/savetimesite/bin/activate_this.py")
+activate_env=os.path.expanduser(os.path.join(SITE_ROOT, "bin", "activate_this.py"))
 execfile(activate_env, dict(__file__=activate_env))
 
 from django.core.wsgi import get_wsgi_application
