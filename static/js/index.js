@@ -96,7 +96,8 @@ function appendItemToSection(item) {
                 "<span class=\"upvote-count\">" + item["num_likes"] + "</span>" +
             "</div>" +
             "<div class=\"desc\">" +
-                "<a class=\"item-url\" href=\"" + item["url"] + "\">" + item["title"] + "</a>" +
+                "<a class=\"item-url\" target=\"_blank\" href=\"" + item["url"] + "\">" +
+                        item["title"] + "</a>" +
                 "<span class=\"item-tagline\">" + item["desc"] + "</span>" +
             "</div>" +
         "</li>"
