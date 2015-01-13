@@ -3,7 +3,7 @@ var MONTHS = ["一月", "二月", "三月", "四月", "五月", "六月",
 var WEEKDAYS = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
 var TODAY = "今天";
 var YESTERDAY = "昨天";
-var DOMAIN = "http://127.0.0.1:8000";
+var DOMAIN = location.origin;
 var BUTTON_HTML = "<div class=\"button load-more-button\">更多</div>";
 
 function loadMore() {
@@ -95,7 +95,8 @@ function appendItemToSection(item) {
                 "<span class=\"upvote-count\">" + item["num_likes"] + "</span>" +
             "</div>" +
             "<div class=\"desc\">" +
-                "<a class=\"item-url\" href=\"" + item["url"] + "\">" + item["title"] + "</a>" +
+                "<a class=\"item-url\" target=\"_blank\" href=\"" + item["url"] + "\">" +
+                        item["title"] + "</a>" +
                 "<span class=\"item-tagline\">" + item["desc"] + "</span>" +
             "</div>" +
         "</li>"
@@ -153,13 +154,13 @@ $(document).ready(function(){
     loadMore();
 
     $("#content").on("click", "a.upvote-link", function(event) {
+        event.preventDefault();
         // Refer to the clicked element using $(this) instead of this, so jquery can understand
         // what that is.
         likeItem($(this));
     });
 
     $("#content").on("click", ".load-more-button", function() {
-        alert("还没有测试呢");
         loadMore();
     });
 });

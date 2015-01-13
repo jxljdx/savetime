@@ -3,8 +3,7 @@ var MONTHS = ["一月", "二月", "三月", "四月", "五月", "六月",
 var WEEKDAYS = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
 var TODAY = "今天";
 var YESTERDAY = "昨天";
-// var DOMAIN = "http://127.0.0.1:8000";
-var DOMAIN = "http://182.92.176.72";
+var DOMAIN = location.origin;
 var BUTTON_HTML = "<div class=\"button load-more-button\">更多</div>";
 
 function loadMore() {
@@ -155,6 +154,7 @@ $(document).ready(function(){
     loadMore();
 
     $("#content").on("click", "a.upvote-link", function(event) {
+        event.preventDefault();
         // Refer to the clicked element using $(this) instead of this, so jquery can understand
         // what that is.
         likeItem($(this));
