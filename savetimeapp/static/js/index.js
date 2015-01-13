@@ -153,7 +153,6 @@ $(document).ready(function(){
     loadMore();
 
     $("#content").on("click", "a.upvote-link", function(event) {
-        event.preventDefault();
         // Refer to the clicked element using $(this) instead of this, so jquery can understand
         // what that is.
         likeItem($(this));
