@@ -4,7 +4,7 @@ ul {
 }
 
 li:hover {
-    background-color: rgba(223, 116, 1, 0.1);
+    background-color: rgba(0, 81, 255, 0.1);
 }
 
 .posts-date-weekday {
@@ -119,10 +119,10 @@ li:hover {
     width: 120px;
     height: 40px;
     line-height: 40px;
-    background-color: rgba(218, 85, 47, 0.7);
+    background-color: #69a74e;
 }
 
 .load-more-button:hover {
-    color: rgba(218, 85, 47, 0.9);
-    background-color: rgba(218, 85, 47, 0.2);
+    color: #69a74e;
+    background-color: rgba(105, 167, 78, 0.2);
 }

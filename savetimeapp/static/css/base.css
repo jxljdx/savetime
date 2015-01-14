@@ -14,7 +14,7 @@
     display: inline-block;
     font-size: 30px;
     font-weight: bold;
-    background: #DA552F;
+    background: #3a5795;
     border-radius: 20px;
     color: white;
     margin-right: 15px;
@@ -31,7 +31,7 @@
     height: 20px;
     line-height: 20px;
     font-size: 20px;
-    color: #DA552F;
+    color: #3a5795;
 }
 
 .brand-title h2 {
@@ -39,7 +39,7 @@
     margin: 0px;
     font-size: 15px;
     height: 20px;
-    padding-top: 3px;
+    padding-top: 5px;
 }
 
 hr {
