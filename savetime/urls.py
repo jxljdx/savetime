@@ -11,9 +11,15 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'savetimeapp.views.home', name='home'),
     # /items/<number>/<number> -> loadSavetimeItems
-    url(r'^items/(?P<num_items>\d+)/(?P<num_items_so_far>\d+)',
+    url(r'^items/(?P<num_items>\d+)/(?P<num_items_so_far>\d+)$',
         'savetimeapp.views.loadSavetimeItems',
         name='loadSavetimeItems'),
+    # /items/<number>/<time> -> loadSavetimeItemsBeforeTime
+    # <time> format is as follows,
+    # Year-month-day-hour-minute-second-serverTimezone
+    url(r'^items/(?P<num_items>\d+)/(?P<time_str>\d+-\d+-\d+-\d+-\d+-\d+-.+)',
+        'savetimeapp.views.loadSavetimeItemsBeforeTime',
+        name='loadSavetimeItemsBeforeTime'),
     # /item/<number>/like -> likeSavetimeItem
     url(r'^item/(?P<item_id>\d+)/like', 'savetimeapp.views.likeSavetimeItem',
         name='likeSavetimeItem'),

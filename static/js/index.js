@@ -9,9 +9,14 @@ var BUTTON_HTML = "<div class=\"button load-more-button\">更多</div>";
 function loadMore() {
     // Number of items we want to load for each request
     var NUM_ITEMS = 100;
-    // Number of items in page so far
-    var num_items_so_far = $(".savetime-item").length;
-    var request_url = DOMAIN + "/items/" + NUM_ITEMS + "/" + num_items_so_far;
+    // // Number of items in page so far
+    // var num_items_so_far = $(".savetime-item").length;
+    // var request_url = DOMAIN + "/items/" + NUM_ITEMS + "/" + num_items_so_far;
+    var oldest_item_time = $(".savetime-item").last().attr("data-item-date-time");
+    if (oldest_item_time == undefined || oldest_item_time == null) {
+        oldest_item_time = "2200-01-01-01-01-00-UTC";
+    }
+    var request_url = DOMAIN + "/items/" + NUM_ITEMS + "/" + oldest_item_time;
 
     $.ajax({
         url: request_url,
@@ -89,7 +94,7 @@ function appendSection(date) {
 // Appends a new save time item to the last posts section's <ul> portion
 function appendItemToSection(item) {
     $("ul").last().append(
-        "<li class=\"savetime-item\" data-item-id=\"" + item.id + "\">" +
+        "<li class=\"savetime-item\" data-item-id=\"" + item.id + "\" data-item-date-time=\"" + item["created_at"] + "\">" +
             "<div class=\"upvote\">" +
                 "<a href=\"#\" class=\"upvote-link\"></a>" +
                 "<span class=\"upvote-count\">" + item["num_likes"] + "</span>" +
