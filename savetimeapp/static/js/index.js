@@ -16,7 +16,7 @@ function loadMore() {
     if (oldest_item_time == undefined || oldest_item_time == null) {
         oldest_item_time = "2200-01-01-01-01-00-UTC";
     }
-    var request_url = DOMAIN + "/items/" + NUM_ITEMS + "/" + oldest_item_time;
+    var request_url = DOMAIN + "/items/before/" + NUM_ITEMS + "/" + oldest_item_time;
 
     $.ajax({
         url: request_url,

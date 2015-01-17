@@ -30,10 +30,10 @@ def loadSavetimeItems(request, num_items, num_items_so_far):
         responses.append(response)
     return HttpResponse(json.dumps(responses), content_type="application/json")
 
-def loadSavetimeItemsBeforeTime(request, num_items, time_str):
+def loadSavetimeItemsGivenTime(request, before_or_after, num_items, time_str):
     '''
-    Returns back list of save time items before given time in local time
-    decreasing order.
+    Returns back list of save time items before or after given time in local
+    time decreasing order.
     '''
     time = None
     try:
@@ -46,9 +46,16 @@ def loadSavetimeItemsBeforeTime(request, num_items, time_str):
         resp = {"msg": "Given time is not correct"}
         return HttpResponse(json.dumps(resp), content_type="application/json")
 
-    items = Item.objects.filter(created_at__lt=time) \
-                        .order_by("created_at") \
-                        .reverse()[0:num_items]
+    items = None
+    if before_or_after == "before":
+        items = Item.objects.filter(created_at__lt=time) \
+                            .order_by("created_at") \
+                            .reverse()[0:num_items]
+    else:
+        items = Item.objects.filter(created_at__gt=time) \
+                            .order_by("created_at") \
+                            .reverse()[0:num_items]
+
     responses = []
     for item in items:
         response = {}

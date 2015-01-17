@@ -14,12 +14,15 @@ urlpatterns = patterns('',
     url(r'^items/(?P<num_items>\d+)/(?P<num_items_so_far>\d+)$',
         'savetimeapp.views.loadSavetimeItems',
         name='loadSavetimeItems'),
-    # /items/<number>/<time> -> loadSavetimeItemsBeforeTime
+
+    # /items/(before|after)/<number>/<time> -> loadSavetimeItemsGivenTime
+    # Load num of save time items before or after given time.
     # <time> format is as follows,
     # Year-month-day-hour-minute-second-serverTimezone
-    url(r'^items/(?P<num_items>\d+)/(?P<time_str>\d+-\d+-\d+-\d+-\d+-\d+-.+)',
-        'savetimeapp.views.loadSavetimeItemsBeforeTime',
-        name='loadSavetimeItemsBeforeTime'),
+    url(r'^items/(?P<before_or_after>(before|after))/(?P<num_items>\d+)/(?P<time_str>\d+-\d+-\d+-\d+-\d+-\d+-.+)',
+        'savetimeapp.views.loadSavetimeItemsGivenTime',
+        name='loadSavetimeItemsGivenTime'),
+
     # /item/<number>/like -> likeSavetimeItem
     url(r'^item/(?P<item_id>\d+)/like', 'savetimeapp.views.likeSavetimeItem',
         name='likeSavetimeItem'),
