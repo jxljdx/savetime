@@ -168,4 +168,16 @@ $(document).ready(function(){
     $("#content").on("click", ".load-more-button", function() {
         loadMore();
     });
+
+    $("#content").on("mouseover", ".upvote", function(event) {
+        $(this).find("a.upvote-link").css("border-bottom", "12px solid #EB4A10");
+    });
+
+    $("#content").on("mouseout", ".upvote", function(event) {
+        $(this).find("a.upvote-link").css("border-bottom", "12px solid #534540");
+    });
+
+    $("#content").on("click", ".upvote", function(event) {
+        likeItem($(this).find("a.upvote-link"));
+    });
 });
