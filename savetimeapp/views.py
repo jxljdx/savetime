@@ -15,6 +15,9 @@ def home(request):
     # return HttpResponse("Hello, this is the homepage")
     return render(request, "index.html")
 
+def about(request):
+    return render(request, "about.html")
+
 def loadSavetimeItems(request, num_items, num_items_so_far):
     ''' Returns back list of save time items in local time decreasing order. '''
     items = Item.objects.order_by("created_at").reverse()[num_items_so_far:(num_items_so_far + num_items)]

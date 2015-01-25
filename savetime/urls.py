@@ -10,6 +10,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'savetimeapp.views.home', name='home'),
+    url(r'^about$', 'savetimeapp.views.about', name='about'),
     # /items/<number>/<number> -> loadSavetimeItems
     url(r'^items/(?P<num_items>\d+)/(?P<num_items_so_far>\d+)$',
         'savetimeapp.views.loadSavetimeItems',

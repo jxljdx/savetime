@@ -15,12 +15,6 @@ li:hover {
     margin: 0 8px 0 0;
 }
 
-#content {
-    max-width: 750px;
-    margin: 0 auto;
-    padding: 15px 10px;
-}
-
 .upvote {
     display: inline-block;
     float: left;
