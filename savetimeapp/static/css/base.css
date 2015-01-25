@@ -71,10 +71,23 @@ hr {
     line-height: 40px;
 }
 
-.header-menu-item:hover {
-    color: #3a5795 !important;
+.header-menu-item-link {
+    text-decoration: none;
+    color: rgba(122, 122, 122, 0.7);
 }
 
-.header-menu-item a {
-    text-decoration: none;
+.header-menu-item-link:hover {
+    color: #3a5795;
 }
+
+
+
+
+
+
+
+
+
+
+
+
