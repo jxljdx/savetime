@@ -1,14 +1,6 @@
-// var DOMAIN = location.origin;
 var animated = false;
 
 $(document).ready(function() {
-    // $(".header-menu-item#search").hover(function() {
-    //     var onHoverSearchImgPath = DOMAIN + "/static/img/search_hover.png"
-    //     $(this).find("img").attr("src", onHoverSearchImgPath);
-    // }, function() {
-    //     var searchImgPath = DOMAIN + "/static/img/search.png"
-    //     $(this).find("img").attr("src", searchImgPath);
-    // });
 
     $(".header-menu-item#search").hover(function() {
         if (!animated) {
@@ -45,26 +37,6 @@ $(document).ready(function() {
                 // Focus input
                 $(input).focus();
             });
-
-            // $(input).animate({
-            //     width: "+=" + widthToAddForInput + "px"
-            // }, function() {
-            //     $(container).css("box-shadow", "0 0 2px 2px #888");
-            //     $(container).css("height", "93px");
-            //     $(container).css("background-color", "#fff");
-            //     // $(container).animate({
-            //     //     boxShadow: "0 0 2px 2px #888",
-            //     //     height: "93px",
-            //     //     backgroundColor: "#fff"
-            //     // });
-
-            //     $(categoriesDiv).animate({
-            //         opacity: 1
-            //     });
-
-            //     // Focus input
-            //     $(input).focus();
-            // });
         }
     });
 
