@@ -69,6 +69,12 @@ hr {
     width: 40px;
     height: 40px;
     line-height: 40px;
+    float: left;
+    margin-right: 10px;
+}
+
+.header-menu-item img {
+    vertical-align: middle;
 }
 
 .header-menu-item-link {
@@ -80,10 +86,55 @@ hr {
     color: #3a5795;
 }
 
+.header-menu-item#search {
+    width: 120px;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+}
 
+.header-menu-item#search input {
+    outline: none;
+    border-style: hidden;
+    box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.11),inset 0 0 0 1px rgba(0,0,0,0.13);
+    padding-left: 30px;
+    padding-right: 5px;
+    width: 120px;
+    height: 32px;
+    background: url("../img/search.png") no-repeat;
+    border-radius: 5px;
+    font-size: 16px;
+}
 
+.header-menu-item#search input::-webkit-input-placeholder {
+   color: #65737e;
+}
 
+.header-menu-item#search input:-moz-placeholder { /* Firefox 18- */
+   color: #65737e;
+}
 
+.header-menu-item#search input::-moz-placeholder {  /* Firefox 19+ */
+   color: #65737e;
+}
+
+.header-menu-item#search input:-ms-input-placeholder {
+   color: #65737e;
+}
+
+div.categories {
+    opacity: 0;
+    text-align: left;
+}
+
+div.categories span.category {
+    font-size: 14px;
+    background-color: #3A5795;
+    padding: 3px 5px;
+    border-radius: 2px;
+    color: white;
+    margin-right: 5px;
+}
 
 
 

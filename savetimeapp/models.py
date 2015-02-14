@@ -11,3 +11,4 @@ class Item(models.Model):
     num_likes = models.IntegerField(default=0)
     url = models.CharField(max_length=300)
     desc = models.CharField(max_length=2048)
+    keywords = models.CharField(max_length=200, default='')

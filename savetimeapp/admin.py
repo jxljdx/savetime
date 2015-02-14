@@ -15,6 +15,6 @@ class ItemAdmin(admin.ModelAdmin):
     #     }),
     # )
     form = ItemDescForm
-    list_display = ('title', 'num_likes', 'created_at', 'url')
+    list_display = ('title', 'num_likes', 'created_at', 'url', 'keywords')
 
 admin.site.register(Item, ItemAdmin)
