@@ -5,7 +5,10 @@ function isHomepage() {
     // Delete anchor at the end of url, and remove slashes for both url
     // and domain, check if the modified url is the same as modified
     // domain, if they are, current page is the homepage.
-    url = url.substring(0, url.indexOf("#")).split("/").join("");
+    if (url.indexOf("#") != -1) {
+        url = url.substring(0, url.indexOf("#"));
+    }
+    url = url.split("/").join("");
     domain = domain.split("/").join("");
     if (url == domain) {
         return true;
