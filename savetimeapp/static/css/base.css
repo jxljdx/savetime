@@ -93,40 +93,6 @@ hr {
     position: relative;
 }
 
-/*
- * [ Alternative entry UI for search and categorization ]
-
-.header-menu-item#search input {
-    outline: none;
-    border-style: hidden;
-    box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.11),inset 0 0 0 1px rgba(0,0,0,0.13);
-    padding-left: 30px;
-    padding-right: 5px;
-    width: 120px;
-    height: 32px;
-    background: url("../img/search.png") no-repeat;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.header-menu-item#search input::-webkit-input-placeholder {
-   color: #65737e;
-}
-
-.header-menu-item#search input:-moz-placeholder {
-   color: #65737e;
-}
-
-.header-menu-item#search input::-moz-placeholder {
-   color: #65737e;
-}
-
-.header-menu-item#search input:-ms-input-placeholder {
-   color: #65737e;
-}
-
-*/
-
 div#search {
     max-width: 650px;
     margin: 20px auto 40px;
