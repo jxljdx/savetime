@@ -19,6 +19,7 @@ var OrderByEnum = {
 
 // What order by method is being used for save time items on current page
 var curOrderBy = OrderByEnum.TimeDecrease;
+var inSearchMode = false;
 
 function onLoadMoreSuccess(data) {
     if (curOrderBy == OrderByEnum.TimeDecrease) {
@@ -174,11 +175,14 @@ function findOldestItemTime() {
     return oldest_item_time_str;
 }
 
-function loadMore() {
+// Load more save times from server using keyword,
+// keyword is only needed when loadMore request comes from search, in which
+// case, inSearchMode is set to true.
+function loadMore(keyword) {
     // Number of items we want to load for each request
-    var NUM_ITEMS = 100;
+    var NUM_ITEMS = 50;
 
-    if (curOrderBy == OrderByEnum.TimeDecrease) {
+    if (!inSearchMode) {
         var request_url = DOMAIN + "/items/before/" + NUM_ITEMS + "/" + findOldestItemTime();
         $.ajax({
             url: request_url,
@@ -186,8 +190,7 @@ function loadMore() {
                 onLoadMoreSuccess(data);
             }
         });
-    } else if (curOrderBy == OrderByEnum.LikesDecrease) {
-        var keyword = $("div#search input[type=text]").val();
+    } else {
         if (keyword.length > 0) {
             var request_url = DOMAIN + "/search/items/" + keyword + "/before/" + NUM_ITEMS + "/" + findOldestItemTime();
             $.ajax({
@@ -204,24 +207,28 @@ function loadMore() {
     }
 }
 
-function search() {
+function search(keyword) {
+    inSearchMode = true;
+    curOrderBy = OrderByEnum.LikesDecrease;
+
     // Remove all the content in content div
     $("#content").empty();
 
     // Add a <ul> section in content div so we can append <li> elements in <ul>
     $("#content").append("<ul></ul>");
 
-    loadMore();
+    loadMore(keyword);
 }
 
 $(document).ready(function(){
     // Load the first batch of save time items if this is the home page
     if (isHomepage()) {
-        loadMore();
+        loadMore("");
     }
 
     $("#content").on("click", ".load-more-button", function() {
-        loadMore();
+        var keyword = $("div#search input[type=text]").val();
+        loadMore(keyword);
     });
 
     $("#content").on("click", "a.upvote-link", function(event) {
@@ -245,16 +252,22 @@ $(document).ready(function(){
 
     $("div#search input[type=button]").click(function(event) {
         event.preventDefault();
-        curOrderBy = OrderByEnum.LikesDecrease;
-        search();
+        var keyword = $("div#search input[type=text]").val();
+        search(keyword);
     });
 
     // Make on input enter, it behaves correctly
     $("div#search input[type=text]").keypress(function(event) {
         if (event.keyCode == 13) {
             event.preventDefault();
-            curOrderBy = OrderByEnum.LikesDecrease;
-            search();
+            var keyword = $("div#search input[type=text]").val();
+            search(keyword);
         }
+    });
+
+    $("#cssmenu a").click(function(event) {
+        event.preventDefault();
+        var keyword = $(this).find("span").text();
+        search(keyword);
     });
 });
