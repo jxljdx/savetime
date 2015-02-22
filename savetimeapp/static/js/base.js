@@ -46,4 +46,9 @@ $(document).ready(function() {
             menu.addClass('open');
         }
     });
+
+    // Go back to home page when clicking on brand logo
+    $("div.brand-logo").click(function() {
+        window.location.href = location.origin;
+    });
 });

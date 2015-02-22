@@ -25,6 +25,7 @@
     border-radius: 20px;
     color: white;
     margin-right: 15px;
+    cursor: pointer;
 }
 
 .brand-title {
@@ -142,14 +143,22 @@ div#search input[type=button]:active {
     background-size: 18px;
 }
 
+/* This is used in combine with #cssmemu to center cssmemu without knowing its width */
+#cssmenu-outer {
+    float: right;
+    right: 50%;
+    position: relative;
+}
+
 #cssmenu {
   background: white;
   margin: 0;
-  width: 540px;
   padding: 0;
   line-height: 1;
   display: block;
   position: relative;
+  float: right;
+  right: -50%;
 }
 #cssmenu ul {
   list-style: none;
@@ -329,8 +338,7 @@ div#search input[type=button]:active {
   top: 21px;
 }
 #cssmenu > ul > li > a {
-  /*color: #ffffff;*/
-  color: black;
+  color: gray;
   padding: 15px 20px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -507,8 +515,6 @@ div#search input[type=button]:active {
   }
 }
 
-
-
-
-
-
+.lev1-category-title {
+    font-size: 18px;
+}
