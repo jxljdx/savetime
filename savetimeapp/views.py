@@ -103,14 +103,14 @@ def searchSavetimeItemsGivenTime(request, keyword, before_or_after, num_items, t
                             .filter(Q(title__icontains=keyword) | \
                                     Q(desc__icontains=keyword) | \
                                     Q(keywords__icontains=keyword)) \
-                            .order_by("created_at") \
+                            .order_by("num_likes") \
                             .reverse()[0:num_items]
     else:
         items = Item.objects.filter(created_at__gt=time) \
                             .filter(Q(title__icontains=keyword) | \
                                     Q(desc__icontains=keyword) | \
                                     Q(keywords__icontains=keyword)) \
-                            .order_by("created_at") \
+                            .order_by("num_likes") \
                             .reverse()[0:num_items]
 
     responses = []
