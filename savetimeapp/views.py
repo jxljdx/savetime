@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import dateformat
@@ -8,7 +9,10 @@ import json
 
 # Year-month-day-hour-minute-second-serverTimezone
 TIME_FORMAT = '%Y-%m-%d-%H-%M-%S-%Z'
-SUCCESS = {"msg": "success"}
+MESSAGE_KEY = "msg"
+DATA_KEY = "data"
+SUCCESS_MSG = "success"
+SUCCESS = {"msg": SUCCESS_MSG}
 
 # Create your views here.
 def home(request):
@@ -38,6 +42,8 @@ def loadSavetimeItemsGivenTime(request, before_or_after, num_items, time_str):
     Returns back list of save time items before or after given time in local
     time decreasing order.
     '''
+
+    # Get time object from string
     time = None
     try:
         # strptime does not set the timezone info, so we have to explictly
@@ -70,6 +76,55 @@ def loadSavetimeItemsGivenTime(request, before_or_after, num_items, time_str):
         response["id"] = item.id
         responses.append(response)
     return HttpResponse(json.dumps(responses), content_type="application/json")
+
+def searchSavetimeItemsGivenTime(request, keyword, before_or_after, num_items, time_str):
+    '''
+    Searches and returns back list of save time items, which contain the
+    matching text in the title, description or keyword field, before or after
+    given time in local time decreasing order.
+    '''
+
+    # Get time object from string
+    time = None
+    try:
+        # strptime does not set the timezone info, so we have to explictly
+        # set this info.
+        time = datetime.strptime(time_str, TIME_FORMAT)
+        item_timezone = timezone(time_str.split("-")[-1])
+        time = time.replace(tzinfo=item_timezone)
+    except ValueError:
+        resp = {"msg": "Given time is not correct"}
+        return HttpResponse(json.dumps(resp), content_type="application/json")
+
+    # Search for items
+    items = None
+    if before_or_after == "before":
+        items = Item.objects.filter(created_at__lt=time) \
+                            .filter(Q(title__icontains=keyword) | \
+                                    Q(desc__icontains=keyword) | \
+                                    Q(keywords__icontains=keyword)) \
+                            .order_by("created_at") \
+                            .reverse()[0:num_items]
+    else:
+        items = Item.objects.filter(created_at__gt=time) \
+                            .filter(Q(title__icontains=keyword) | \
+                                    Q(desc__icontains=keyword) | \
+                                    Q(keywords__icontains=keyword)) \
+                            .order_by("created_at") \
+                            .reverse()[0:num_items]
+
+    responses = []
+    for item in items:
+        response = {}
+        response["title"] = item.title
+        response["desc"] = item.desc
+        response["url"] = item.url
+        response["created_at"] = item.created_at.strftime(TIME_FORMAT)
+        response["num_likes"] = item.num_likes
+        response["id"] = item.id
+        responses.append(response)
+    resp = {MESSAGE_KEY: SUCCESS_MSG, DATA_KEY: responses}
+    return HttpResponse(json.dumps(resp), content_type="application/json")
 
 def likeSavetimeItem(request, item_id):
     item = None

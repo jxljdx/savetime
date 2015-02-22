@@ -8,6 +8,12 @@ urlpatterns = patterns('',
     # url(r'^$', 'savetime.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    # ++++ IMPORTANT ++++
+    # Restful APIs return format
+    # {"msg": "success | <Failure detail>",
+    #  "data": "<Any data we want to return back>"}
+    # No need to include data part if it's a failure
+
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'savetimeapp.views.home', name='home'),
     url(r'^about$', 'savetimeapp.views.about', name='about'),
@@ -23,6 +29,15 @@ urlpatterns = patterns('',
     url(r'^items/(?P<before_or_after>(before|after))/(?P<num_items>\d+)/(?P<time_str>\d+-\d+-\d+-\d+-\d+-\d+-.+)',
         'savetimeapp.views.loadSavetimeItemsGivenTime',
         name='loadSavetimeItemsGivenTime'),
+
+    # /search/items/<keyword>/(before|after)/<number>/<time> -> searchSavetimeItemsGivenTime
+    # Search and return num of save time items, which contain keyword in title or
+    # description or keyword field, before or after given time.
+    # <time> format is as follows,
+    # Year-month-day-hour-minute-second-serverTimezone
+    url(r'^search/items/(?P<keyword>.+?)/(?P<before_or_after>(before|after))/(?P<num_items>\d+)/(?P<time_str>\d+-\d+-\d+-\d+-\d+-\d+-.+)',
+        'savetimeapp.views.searchSavetimeItemsGivenTime',
+        name='searchSavetimeItemsGivenTime'),
 
     # /item/<number>/like -> likeSavetimeItem
     url(r'^item/(?P<item_id>\d+)/like', 'savetimeapp.views.likeSavetimeItem',
