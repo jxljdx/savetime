@@ -215,8 +215,10 @@ function search() {
 }
 
 $(document).ready(function(){
-    // Load the first batch of save time items
-    loadMore();
+    // Load the first batch of save time items if this is the home page
+    if (isHomepage()) {
+        loadMore();
+    }
 
     $("#content").on("click", ".load-more-button", function() {
         loadMore();

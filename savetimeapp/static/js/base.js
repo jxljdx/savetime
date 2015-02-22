@@ -2,11 +2,14 @@ function isHomepage() {
     var url = location.href;
     var domain = location.origin;
 
-    // Delete anchor at the end of url, and remove slashes for both url
+    // Delete anchor and ? at the end of url, and remove slashes for both url
     // and domain, check if the modified url is the same as modified
     // domain, if they are, current page is the homepage.
     if (url.indexOf("#") != -1) {
         url = url.substring(0, url.indexOf("#"));
+    }
+    if (url.indexOf("?") != -1) {
+        url = url.substring(0, url.indexOf("?"));
     }
     url = url.split("/").join("");
     domain = domain.split("/").join("");

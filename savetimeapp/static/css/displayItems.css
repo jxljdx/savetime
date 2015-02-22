@@ -1,0 +1,127 @@
+ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+li:hover {
+    background-color: rgba(0, 81, 255, 0.1);
+}
+
+.posts-date-weekday {
+    color: #534540;
+    display: inline;
+    font-size: 1.5em;
+    font-weight: 600;
+    margin: 0 8px 0 0;
+}
+
+.upvote {
+    display: inline-block;
+    float: left;
+    border-radius: 3px;
+    margin-right: 13px;
+    width: 30px;
+    height: 42px;
+    text-align: center;
+    background: #EDECEB;
+    padding: 0 1px;
+    box-shadow: 0px 1px 0px 0px rgba(83,69,64,0.3),0px 1px 1px 0px rgba(0,0,0,0.2);
+}
+
+.upvote:hover {
+    box-shadow: 0px 1px 0px 0px rgba(235,74,16,1.0),0px 1px 1px 0px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.upvote-link {
+    position: relative;
+    display: inline-block;
+    bottom: 5px;
+    width: 0px;
+    height: 0px;
+    border-bottom: 12px solid #534540;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid transparent;
+    transition: border-color, 0.1s, ease-in;
+}
+
+.upvote-link:hover {
+    border-bottom: 12px solid #EB4A10;
+}
+
+.upvote-count {
+    display: block;
+    position: relative;
+    font-size: 12px;
+    bottom: 4px;
+    color: #534540;
+    font-weight: 600;
+    transition: color, 0.1s, ease-in;
+}
+
+.desc {
+    display: inline-block;
+    float: left;
+    box-sizing: border-box;
+}
+
+.savetime-item {
+    clear: both;
+    transition: background, 0.1s;
+    background: white;
+    min-height: 62px;
+    line-height: 17px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding: 10px;
+    position: relative;
+    margin-bottom: 5px;
+    border-radius: 3px;
+}
+
+.item-url {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    color: #534540;
+    margin: 6px 2px 0 0px;
+    line-height: 22px;
+}
+
+.item-url:hover {
+    text-decoration: underline;
+}
+
+.item-tagline {
+    color: #999999;
+    display: block;
+    margin: 5px 0 0 0px;
+    font-size: 17px;
+    line-height: 20px;
+}
+
+.posts-date-time {
+    color: #bbbbbb;
+    margin: 0 10px;
+}
+
+.button {
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+    border-radius: 3px;
+    color: white;
+}
+
+.load-more-button {
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #69a74e;
+}
+
+.load-more-button:hover {
+    color: #69a74e;
+    background-color: rgba(105, 167, 78, 0.2);
+}
