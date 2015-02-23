@@ -22,7 +22,14 @@ function isHomepage() {
 
 $(document).ready(function() {
     // Hack: align search button with search input box in Firefox
-    if (navigator.userAgent.indexOf("Firefox") != -1 ) {
+    if (navigator.userAgent.indexOf("Firefox") != -1) {
+        $("div#search input[type=button]").css("top", "-2px");
+    }
+
+    // Also align search button with search input box in IE, the first
+    // condition is for matching IE version before 11, the second is
+    // for version 11
+    if (navigator.userAgent.indexOf("MSIE") > 0 || !!navigator.userAgent.match(/Trident\/7\./)) {
         $("div#search input[type=button]").css("top", "-2px");
     }
 
