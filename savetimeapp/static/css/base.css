@@ -12,6 +12,16 @@
     clear: left;
 }
 
+#footer {
+    background: gainsboro;
+    margin: 0 auto;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    color: gray;
+    font-size: 14px;
+}
+
 .brand-logo {
     line-height: 40px;
     text-align: center;
