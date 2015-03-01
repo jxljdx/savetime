@@ -1,11 +1,35 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+
+{% block extra-stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static "css/categories.css" %}">
+{% endblock %}
+
+{% block extra-scripts %}
+<script src="{% static "js/categories.js" %}"></script>
+{% endblock %}
 
 {% block content %}
 
-{% for item in critical_category_list %}
-<h2>
-    {{ item.sub_category }}
-</h2>
-{% endfor %}
+<section id="critical">
+    <a name="critical"><div class="main-category">极痛</div></a>
+    {% for category in critical_category_list %}
+    <span class="sub-category">{{ category.sub_category }}</span>
+    {% endfor %}
+</section>
+
+<section id="major">
+    <a name="major"><div class="main-category">很痛</div></a>
+    {% for category in major_category_list %}
+    <span class="sub-category">{{ category.sub_category }}</span>
+    {% endfor %}
+</section>
+
+<section id="minor">
+    <a name="minor"><div class="main-category">痛</div></a>
+    {% for category in minor_category_list %}
+    <span class="sub-category">{{ category.sub_category }}</span>
+    {% endfor %}
+</section>
 
 {% endblock %}

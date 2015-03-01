@@ -1,0 +1,23 @@
+span.sub-category {
+    padding: 20px 20px;
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+span.sub-category:hover {
+    position: relative;
+    top: -2px;
+}
+
+section {
+    clear: left;
+}
+
+.main-category {
+    font-size: 24px;
+    font-weight: 600;
+    padding: 20px;
+}

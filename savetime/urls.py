@@ -30,12 +30,14 @@ urlpatterns = patterns('',
         'savetimeapp.views.loadSavetimeItemsGivenTime',
         name='loadSavetimeItemsGivenTime'),
 
-    # /search/items/<keyword>/(before|after)/<number>/<time> -> searchSavetimeItemsGivenTime
+    # /search/items/<keyword>/(before|after)/(1|0)/<number>/<time> -> searchSavetimeItemsGivenTime
     # Search and return num of save time items, which contain keyword in title or
-    # description or keyword field, before or after given time.
+    # description, keywords or category field, before or after given time.
+    # If categories_only is set to 1, given keyword is the category name, we only need to return
+    # save time items in that category.
     # <time> format is as follows,
     # Year-month-day-hour-minute-second-serverTimezone
-    url(r'^search/items/(?P<keyword>.+?)/(?P<before_or_after>(before|after))/(?P<num_items>\d+)/(?P<time_str>\d+-\d+-\d+-\d+-\d+-\d+-.+)',
+    url(r'^search/items/(?P<keyword>.+?)/(?P<before_or_after>(before|after))/(?P<categories_only>(1|0))/(?P<num_items>\d+)/(?P<time_str>\d+-\d+-\d+-\d+-\d+-\d+-.+)',
         'savetimeapp.views.searchSavetimeItemsGivenTime',
         name='searchSavetimeItemsGivenTime'),
 

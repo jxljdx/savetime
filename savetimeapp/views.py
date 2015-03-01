@@ -90,11 +90,11 @@ def loadSavetimeItemsGivenTime(request, before_or_after, num_items, time_str):
         responses.append(response)
     return HttpResponse(json.dumps(responses), content_type="application/json")
 
-def searchSavetimeItemsGivenTime(request, keyword, before_or_after, num_items, time_str):
+def searchSavetimeItemsGivenTime(request, keyword, before_or_after, categories_only, num_items, time_str):
     '''
     Searches and returns back list of save time items, which contain the
-    matching text in the title, description or keyword field, before or after
-    given time in local time decreasing order.
+    matching text in the title, description keywords or category field, before
+    or after given time in local time decreasing order.
     '''
 
     # Get time object from string
@@ -110,19 +110,25 @@ def searchSavetimeItemsGivenTime(request, keyword, before_or_after, num_items, t
         return HttpResponse(json.dumps(resp), content_type="application/json")
 
     # Search for items
+    base_conditions = Q(title__icontains=keyword) | \
+                      Q(desc__icontains=keyword) | \
+                      Q(keywords__icontains=keyword)
+    category_condition = Q(categories__sub_category__icontains=keyword)
+    query_conditon = None
+    if int(categories_only) == 1:
+        query_conditon = category_condition
+    else:
+        query_conditon = base_conditions | category_condition
+
     items = None
     if before_or_after == "before":
         items = Item.objects.filter(created_at__lt=time) \
-                            .filter(Q(title__icontains=keyword) | \
-                                    Q(desc__icontains=keyword) | \
-                                    Q(keywords__icontains=keyword)) \
+                            .filter(query_conditon) \
                             .order_by("num_likes") \
                             .reverse()[0:num_items]
     else:
         items = Item.objects.filter(created_at__gt=time) \
-                            .filter(Q(title__icontains=keyword) | \
-                                    Q(desc__icontains=keyword) | \
-                                    Q(keywords__icontains=keyword)) \
+                            .filter(query_conditon) \
                             .order_by("num_likes") \
                             .reverse()[0:num_items]
 

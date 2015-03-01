@@ -20,6 +20,7 @@ var OrderByEnum = {
 // What order by method is being used for save time items on current page
 var curOrderBy = OrderByEnum.TimeDecrease;
 var inSearchMode = false;
+var isSearchingCategory = false;
 
 function onLoadMoreSuccess(data) {
     if (curOrderBy == OrderByEnum.TimeDecrease) {
@@ -192,7 +193,8 @@ function loadMore(keyword) {
         });
     } else {
         if (keyword.length > 0) {
-            var request_url = DOMAIN + "/search/items/" + keyword + "/before/" + NUM_ITEMS + "/" + findOldestItemTime();
+            var request_url = DOMAIN + "/search/items/" + keyword + "/before/" +
+                    (isSearchingCategory ? "1" : "0") + "/" + NUM_ITEMS + "/" + findOldestItemTime();
             $.ajax({
                 url: request_url,
                 success: function( data ) {
@@ -253,6 +255,7 @@ $(document).ready(function(){
     $("div#search input[type=button]").click(function(event) {
         event.preventDefault();
         var keyword = $("div#search input[type=text]").val();
+        isSearchingCategory = false;
         search(keyword);
     });
 
@@ -261,13 +264,8 @@ $(document).ready(function(){
         if (event.keyCode == 13) {
             event.preventDefault();
             var keyword = $("div#search input[type=text]").val();
+            isSearchingCategory = false;
             search(keyword);
         }
-    });
-
-    $("#cssmenu a").click(function(event) {
-        event.preventDefault();
-        var keyword = $(this).find("span").text();
-        search(keyword);
     });
 });
