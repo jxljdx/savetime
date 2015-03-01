@@ -42,4 +42,6 @@ urlpatterns = patterns('',
     # /item/<number>/like -> likeSavetimeItem
     url(r'^item/(?P<item_id>\d+)/like', 'savetimeapp.views.likeSavetimeItem',
         name='likeSavetimeItem'),
+
+    url(r'^categories$', 'savetimeapp.views.categories', name='categories'),
 )

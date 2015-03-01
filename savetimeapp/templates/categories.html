@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for item in critical_category_list %}
+<h2>
+    {{ item.sub_category }}
+</h2>
+{% endfor %}
+
+{% endblock %}

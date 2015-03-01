@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
 from datetime import datetime
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import dateformat
 from pytz import timezone
+from savetimeapp.models import Category
 from savetimeapp.models import Item
 import json
 
@@ -21,6 +23,17 @@ def home(request):
 
 def about(request):
     return render(request, "about.html")
+
+def categories(request):
+    critical_category_list = Category.objects.filter(main_category='critical').order_by("num_clicks").all()
+    major_category_list = Category.objects.filter(main_category='major').order_by("num_clicks")
+    minor_category_list = Category.objects.filter(main_category='minor').order_by("num_clicks")
+    category_dict = {
+        "critical_category_list": critical_category_list,
+        "major_category_list": major_category_list,
+        "minor_category_list": minor_category_list
+    }
+    return render(request, "categories.html", category_dict)
 
 def loadSavetimeItems(request, num_items, num_items_so_far):
     ''' Returns back list of save time items in local time decreasing order. '''
