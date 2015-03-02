@@ -15,6 +15,9 @@ MESSAGE_KEY = "msg"
 DATA_KEY = "data"
 SUCCESS_MSG = "success"
 SUCCESS = {"msg": SUCCESS_MSG}
+CRITICAL_CATEGORY = "critical"
+MAJOR_CATEGORY = "major"
+MINOR_CATEGORY = "minor"
 
 # Create your views here.
 def home(request):
@@ -25,15 +28,55 @@ def about(request):
     return render(request, "about.html")
 
 def categories(request):
-    critical_category_list = Category.objects.filter(main_category='critical').order_by("num_clicks").all()
-    major_category_list = Category.objects.filter(main_category='major').order_by("num_clicks")
-    minor_category_list = Category.objects.filter(main_category='minor').order_by("num_clicks")
+    critical_category_list = Category.objects.filter(main_category=CRITICAL_CATEGORY).order_by("num_clicks")
+    major_category_list = Category.objects.filter(main_category=MAJOR_CATEGORY).order_by("num_clicks")
+    minor_category_list = Category.objects.filter(main_category=MINOR_CATEGORY).order_by("num_clicks")
     category_dict = {
         "critical_category_list": critical_category_list,
         "major_category_list": major_category_list,
         "minor_category_list": minor_category_list
     }
     return render(request, "categories.html", category_dict)
+
+def getCategories(request):
+    critical_category_list = Category.objects.filter(main_category=CRITICAL_CATEGORY).order_by("num_clicks")
+    major_category_list = Category.objects.filter(main_category=MAJOR_CATEGORY).order_by("num_clicks")
+    minor_category_list = Category.objects.filter(main_category=MINOR_CATEGORY).order_by("num_clicks")
+    response_data = {}
+
+    # Get critical category list
+    response_critical = []
+    for c in critical_category_list:
+        response_item = {}
+        response_item["sub_category"] = c.sub_category
+        response_item["num_clicks"] = c.num_clicks
+        response_item["id"] = c.id
+        response_critical.append(response_item)
+
+    # Get major category list
+    response_major = []
+    for c in major_category_list:
+        response_item = {}
+        response_item["sub_category"] = c.sub_category
+        response_item["num_clicks"] = c.num_clicks
+        response_item["id"] = c.id
+        response_major.append(response_item)
+
+    # Get minor category list
+    response_minor = []
+    for c in minor_category_list:
+        response_item = {}
+        response_item["sub_category"] = c.sub_category
+        response_item["num_clicks"] = c.num_clicks
+        response_item["id"] = c.id
+        response_minor.append(response_item)
+
+    response_data = {CRITICAL_CATEGORY: response_critical,
+                     MAJOR_CATEGORY: response_major,
+                     MINOR_CATEGORY: response_minor}
+    response = {MESSAGE_KEY: SUCCESS_MSG,
+                DATA_KEY: response_data}
+    return HttpResponse(json.dumps(response), content_type="application/json")
 
 def loadSavetimeItems(request, num_items, num_items_so_far):
     ''' Returns back list of save time items in local time decreasing order. '''
