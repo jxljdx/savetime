@@ -38,7 +38,7 @@ def categories(request):
     }
     return render(request, "categories.html", category_dict)
 
-def getCategories(request):
+def getCategories(request, which_main_category):
     critical_category_list = Category.objects.filter(main_category=CRITICAL_CATEGORY).order_by("num_clicks")
     major_category_list = Category.objects.filter(main_category=MAJOR_CATEGORY).order_by("num_clicks")
     minor_category_list = Category.objects.filter(main_category=MINOR_CATEGORY).order_by("num_clicks")
@@ -71,9 +71,20 @@ def getCategories(request):
         response_item["id"] = c.id
         response_minor.append(response_item)
 
-    response_data = {CRITICAL_CATEGORY: response_critical,
-                     MAJOR_CATEGORY: response_major,
-                     MINOR_CATEGORY: response_minor}
+    if (which_main_category == CRITICAL_CATEGORY):
+        response_data = response_critical
+    elif (which_main_category == MAJOR_CATEGORY):
+        response_data = response_major
+    elif (which_main_category == MINOR_CATEGORY):
+        response_data = response_minor
+    elif (which_main_category == "all"):
+        response_data = {CRITICAL_CATEGORY: response_critical,
+                         MAJOR_CATEGORY: response_major,
+                         MINOR_CATEGORY: response_minor}
+    else:
+        response = {MESSAGE_KEY: "unknown option, please use, critical, major, minor or all"}
+        return HttpResponse(json.dumps(response), content_type="application/json")
+
     response = {MESSAGE_KEY: SUCCESS_MSG,
                 DATA_KEY: response_data}
     return HttpResponse(json.dumps(response), content_type="application/json")

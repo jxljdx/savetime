@@ -46,5 +46,5 @@ urlpatterns = patterns('',
         name='likeSavetimeItem'),
 
     url(r'^categories$', 'savetimeapp.views.categories', name='categories'),
-    url(r'^get/categories$', 'savetimeapp.views.getCategories', name='getCategories'),
+    url(r'^get/categories/(?P<which_main_category>(critical|major|minor|all))$', 'savetimeapp.views.getCategories', name='getCategories'),
 )
