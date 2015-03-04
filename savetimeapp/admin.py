@@ -17,6 +17,7 @@ class ItemAdmin(admin.ModelAdmin):
     # )
     form = ItemDescForm
     list_display = ('title', 'num_likes', 'created_at', 'url', 'keywords', 'category_names')
+    filter_horizontal = ('categories',)
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('main_category', "sub_category", 'num_clicks')
