@@ -27,6 +27,9 @@
             <div class="header-menu-item" id="downloads">
                 <a href="http://fir.im/hvaz" class="header-menu-item-link">App</a>
             </div>
+            <div class="header-menu-item">
+                <a href="/categories" class="header-menu-item-link">分类</a>
+            </div>
             <div class="header-menu-item" id="about">
                 <a href="about" class="header-menu-item-link">关于</a>
             </div>
@@ -39,16 +42,6 @@
             <input type="text" placeholder="痛点搜索" required>
             <input type="button">
         </form>
-        <div id="cssmenu-outer">
-            <div id='cssmenu'>
-                <ul>
-                    <!-- use class 'has-sub' on li to display an arrow right by the title -->
-                    <li><a href='/categories#critical'><span class="lev1-category-title">极痛</span></a></li>
-                    <li><a href='/categories#major'><span class="lev1-category-title">很痛</span></a></li>
-                    <li class='last'><a href='/categories#minor'><span class="lev1-category-title">痛</span></a></li>
-                </ul>
-            </div>
-        </div>
     </div>
     <div id="content">
         {% block content %}{% endblock %}
