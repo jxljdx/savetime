@@ -14,6 +14,11 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/displayItems.css" %}">
     {% block extra-stylesheets %}{% endblock %}
+    <script>
+    var _hmt = _hmt || [];
+    _hmt.push(['_setAutoPageview', false]);
+    </script>
+    {% block extra-inline-scripts %}{% endblock %}
 </head>
 
 <body>
@@ -49,6 +54,11 @@
     <div id="footer">
     京ICP备15006796号
     </div>
+    <script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol +
+"hm.baidu.com/h.js%3F01234567890ABCDEF01234567890ABCDEF' type='text/javascript'%3E%3C/script%3E"));
+    </script>
 </body>
 
 </html>

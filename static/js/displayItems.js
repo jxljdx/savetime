@@ -256,6 +256,7 @@ $(document).ready(function(){
         event.preventDefault();
         var keyword = $("div#search input[type=text]").val();
         isSearchingCategory = false;
+        _hmt.push(['_trackPageview', '/search/keyword']);
         search(keyword);
     });
 
@@ -265,6 +266,7 @@ $(document).ready(function(){
             event.preventDefault();
             var keyword = $("div#search input[type=text]").val();
             isSearchingCategory = false;
+            _hmt.push(['_trackPageview', '/search/keyword']);
             search(keyword);
         }
     });

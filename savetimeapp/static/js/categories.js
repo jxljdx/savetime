@@ -6,6 +6,8 @@ function getRamdomDarkColor() {
 }
 
 $(document).ready(function() {
+    _hmt.push(['_trackPageview', "/categories"]);
+
     $("span.sub-category").each(function() {
         var rgb = getRamdomDarkColor();
         $(this).css("background", "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")");
@@ -14,6 +16,7 @@ $(document).ready(function() {
     $("span.sub-category").click(function() {
         var keyword = $(this).text();
         isSearchingCategory = true;
+        _hmt.push(['_trackPageview', '/search/category']);
         search(keyword);
     });
 });

@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
+{% block extra-inline-scripts %}
+{% endblock %}
+<script>
+    $(document).ready(function(){
+        _hmt.push(['_trackPageview', "/about"]);
+    });
+</script>
 {% block content %}
 <p>
 『省时间』专注于连接世界上速度最快的人事物，让大家花更少的时间获得更多产出。
