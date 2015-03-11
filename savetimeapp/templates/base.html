@@ -17,6 +17,12 @@
     <script>
     var _hmt = _hmt || [];
     _hmt.push(['_setAutoPageview', false]);
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?18325c76f9f1dafaf6bec3751700d80f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
     </script>
     {% block extra-inline-scripts %}{% endblock %}
 </head>
@@ -54,11 +60,6 @@
     <div id="footer">
     京ICP备15006796号
     </div>
-    <script type="text/javascript">
-        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-        document.write(unescape("%3Cscript src='" + _bdhmProtocol +
-"hm.baidu.com/h.js%3F01234567890ABCDEF01234567890ABCDEF' type='text/javascript'%3E%3C/script%3E"));
-    </script>
 </body>
 
 </html>
